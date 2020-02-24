@@ -31,6 +31,12 @@ public class ShopController {
 		
 		return mav;
 	}
+	
+	// 등록 화면 GET방식 접근 시 해당 view 만 전달 ; WEB-INF/jsp/shop/add.jsp
+	@RequestMapping(value = "/add", method = RequestMethod.GET)
+	public String addForm() throws Exception {
+		return "/shop/add";
+	}
 
 	
 }
