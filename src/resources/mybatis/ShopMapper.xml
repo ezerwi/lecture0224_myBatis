@@ -18,6 +18,7 @@
 		<if test="shopNo>0"> AND SHOP_NO= #{shopNo} </if>
 		<if test="shopStatus != null and shopStatus != ''"> AND SHOP_STATUS = #{shopStatus}</if>
 	</where>
+	ORDER BY SHOP_NO DESC
 </select>
 
 <insert id="insert" parameterType="shop">
