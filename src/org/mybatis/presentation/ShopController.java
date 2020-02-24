@@ -38,5 +38,24 @@ public class ShopController {
 		return "/shop/add";
 	}
 
+	@RequestMapping(value = "/add", method = RequestMethod.POST)
+	public ModelAndView add (Shop shop) throws Exception {
+		RedirectView rv = new RedirectView("list");
+		rv.setExposeModelAttributes(false);
+		
+		this.shopService.add(shop);
+		
+		return new ModelAndView(rv);
+	}
+	
+	@RequestMapping(value = "", method = RequestMethod.)
+	public () throws Exception {
+		
+	}
+	
+	@RequestMapping(value = "", method = RequestMethod.)
+	public () throws Exception {
+		
+	}
 	
 }
