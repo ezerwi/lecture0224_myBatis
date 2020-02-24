@@ -38,6 +38,7 @@ public class ShopController {
 		return "/shop/add";
 	}
 
+	
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public ModelAndView add (Shop shop) throws Exception {
 		
@@ -51,10 +52,17 @@ public class ShopController {
 		return new ModelAndView(rv);
 	}
 	
-	@RequestMapping(value = "", method = RequestMethod.)
-	public () throws Exception {
+	
+	@RequestMapping(value = "/view/{shopNo}", method = RequestMethod.GET)
+	public ModelAndView view (@PathVariable String shopNo ) throws Exception {
+		ModelAndView mv = new ModelAndView("/shop/view");
 		
+		Shop shop = this.shopService.view(shopNo);
+		mv.addObject("shop", shop);
+
+		return mv;
 	}
+	
 	
 	@RequestMapping(value = "", method = RequestMethod.)
 	public () throws Exception {
