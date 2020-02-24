@@ -40,6 +40,9 @@ public class ShopController {
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public ModelAndView add (Shop shop) throws Exception {
+		
+		// RedirectView의 경우 parameter까지 같이 전달됨,
+		// setExposeModelAttributes : RedirectView에 Parameter가 전달되도록 할지 설정 
 		RedirectView rv = new RedirectView("list");
 		rv.setExposeModelAttributes(false);
 		
