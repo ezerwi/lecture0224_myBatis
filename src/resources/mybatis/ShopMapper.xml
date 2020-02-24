@@ -3,6 +3,51 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper>
+<mapper namespace="org.mybatis.persistence.ShopMapper">
+<resultMap type="shop" id="shopResultMap">
+	<id column="SHOP_NO" property="shopNo"/>
+	<result column="SHOP_NAME" property="shopName"/>
+	<result column="SHOP_LOCATION" property="shopLocation"/>
+	<result column="SHOP_STATUS" property="shopStatus"/>
+</resultMap>
+
+<select id="list" parameterType="Shop" resultMap="shopResultMap">
+	SELECT SHOP_NO, SHOP_NAME, SHOP_LOCATION, SHOP_STATUS
+	FROM SHOP
+	<where>
+		<if test="shopNo>0"> AND SHOP_NO= #{shopNo} </if>
+		<if test="shopStatus != null and shopStatus != ''"> AND SHOP_STATUS = #{shopStatus}</if>
+	</where>
+</select>
+
+<insert id="insert" parameterType="shop">
+	<selectKey keyColumn="SHOP_NO" keyProperty="shopNo" resultType="int" order="BEFORE">
+		SELECT SEQ_SHOP_NO.NEXTVAL
+		FROM DUAL
+	</selectKey>
+	INSERT INTO SHOP (SHOP_NO, SHOP_NAME, SHOP_LOCATION, SHOP_STATUS)
+	VALUES (#{shopNo}, #{shopName}, #{shopLocation}, #{shopStatus})
+</insert>
+
+<select id="select" parameterType="java.lang.String" resultMap="shopResultMap">
+	SELECT SHOP_NO, SHOP_NAME, SHOP_LOCATION, SHOP_STATUS
+	FROM SHOP
+	WHERE SHOP_NO = #{shopNo}
+</select>
+
+<update id="update" parameterType="shop">
+	UPDATE SHOP
+	<set>
+		<if test="shopName != null">SHOP_NAME = #{shopName}, </if>
+		<if test="shopLocation != null">SHOP_LOCATION = #{shopLocation}, </if>
+		<if test="shopStatus != null">SHOP_STATUS = #{shopStatus}, </if>
+	</set>
+	WHERE SHOP_NO = #{shopNo}
+</update>
+
+<delete id="delete" parameterType="java.lang.String">
+	DELETE FROM SHOP
+	WHERE SHOP_NO = #{shopNo}
+</delete>
 
 </mapper>
